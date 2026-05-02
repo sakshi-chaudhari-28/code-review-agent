@@ -32,64 +32,64 @@ Achieves **88% precision and 88% recall** on a labelled evaluation suite, matchi
 ---
 
 ## 🏗️ Project Structure
+```
 code-review-agent/
 │
-├── agents/                    # AI agent logic
-│   ├── orchestrator.py        # Main orchestrator — coordinates the full review pipeline
-│   ├── code_analyzer.py       # Detects bugs, code smells, and logic errors
-│   ├── security_scanner.py    # Finds SQL injection, hardcoded secrets, OWASP issues
-│   ├── test_evaluator.py      # Checks for missing test coverage
-│   └── fix_generator.py       # Generates and posts code fix suggestions
+├── agents/                    
+│   ├── orchestrator.py        
+│   ├── code_analyzer.py       
+│   ├── security_scanner.py    
+│   ├── test_evaluator.py      
+│   └── fix_generator.py       
 │
-├── tools/                     # Pluggable tools for GitHub API interaction
-│   └── github_tool.py         # Fetch PR diffs, post inline comments, open PRs
+├── tools/                     
+│   └── github_tool.py         
 │
-├── memory/                    # Vector store for persistent context
-│   └── vector_store.py        # JSON-based memory for past findings
+├── memory/                    
+│   └── vector_store.py        
 │
-├── eval/                      # Evaluation framework for benchmarking agent quality
-│   ├── run_eval.py            # Main evaluation script
-│   └── test_cases/            # Labelled test cases (SQL injection, secrets, clean code)
+├── eval/                      
+│   ├── run_eval.py            
+│   └── test_cases/            
 │
-├── main.py                    # FastAPI app — webhook receiver and API endpoints
-├── requirements.txt           # Python dependencies
-├── Dockerfile                 # Docker container configuration
-├── render.yaml                # Render cloud deployment config
-├── .env.example               # Environment variable template
-├── .dockerignore              # Docker build ignore rules
-├── .gitignore                 # Git ignore rules
-└── README.md                  # Project documentation
-
----
+├── main.py                    
+├── requirements.txt           
+├── Dockerfile                 
+├── render.yaml                
+├── .env.example               
+├── .dockerignore              
+├── .gitignore                 
+└── README.md                  
+```
 
 ## ⚙️ How It Works
+```
 GitHub PR Event
-│
-▼
+      │
+      ▼
 FastAPI Webhook (/webhook)
-│
-├── Verify HMAC Signature
-│
-▼
+      │
+      ├── Verify HMAC Signature
+      │
+      ▼
 Orchestrator Agent
-│
-├── Fetch PR Diff from GitHub API
-│
-├── Pre-check — is code clean? (skip LLM if yes)
-│
-├── Query Memory for past context
-│
-├── Dispatch to specialist agents:
-│     ├── Code Analyzer
-│     ├── Security Scanner
-│     ├── Test Evaluator
-│     └── Fix Generator (high severity only)
-│
-├── Post inline comments on GitHub PR
-│
-└── Store findings in memory for future reviews
-
----
+      │
+      ├── Fetch PR Diff from GitHub API
+      │
+      ├── Pre-check — is code clean? (skip LLM if yes)
+      │
+      ├── Query Memory for past context
+      │
+      ├── Dispatch to specialist agents:
+      │     ├── Code Analyzer
+      │     ├── Security Scanner
+      │     ├── Test Evaluator
+      │     └── Fix Generator (high severity only)
+      │
+      ├── Post inline comments on GitHub PR
+      │
+      └── Store findings in memory for future reviews
+```
 
 ## 🛠️ Tech Stack
 
